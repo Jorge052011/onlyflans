@@ -9,25 +9,27 @@
     <title>Document</title>
     {% include 'web/componentes/scripts.html' %}
 </head>
-<body>
+<body class="d-flex flex-column min-vh-100">
     {% include 'web/componentes/navbar.html' %}
-    <main>
-        <h1>flanes</h1>
+    
+    <main class="Flex-grow-1">
+        <h1>Flanes Disponibles</h1>
         {% for flan in flanes %}
         <img src="{{ flan.imagen.url }}" alt="" >
         <li> {{ flan.nombre_producto }}</li>
         <li> {{ flan.descripcion }}</li>
         <li> {{ flan.precio }}</li>
         <li> {{ flan.stock }}</li>
-        <li> {{ flan.nombre_producto }}</li>
-
+        
         {% endfor %}
 
 
     </main>
+
     
 
 
     {% include "web/componentes/footer.html" %}
 </body>
 </html>
+
