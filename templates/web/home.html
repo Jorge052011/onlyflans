@@ -10,12 +10,24 @@
     {% include 'web/componentes/scripts.html' %}
 </head>
 <body>
-    <h1>home</h1>
-    <p>dsygfsif</p>
-    <p>dsygfsif</p>
-    <p>dsygfsif</p>
+    {% include 'web/componentes/navbar.html' %}
+    <main>
+        <h1>flanes</h1>
+        {% for flan in flanes %}
+        <img src="{{ flan.imagen.url }}" alt="" >
+        <li> {{ flan.nombre_producto }}</li>
+        <li> {{ flan.descripcion }}</li>
+        <li> {{ flan.precio }}</li>
+        <li> {{ flan.stock }}</li>
+        <li> {{ flan.nombre_producto }}</li>
+
+        {% endfor %}
 
 
+    </main>
+    
 
+
+    {% include "web/componentes/footer.html" %}
 </body>
 </html>
