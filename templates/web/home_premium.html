@@ -4,8 +4,28 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
+    {% include 'web/componentes/scripts.html' %}
 </head>
-<body>
-    <h1>Premium</h1>
+<body class="d-flex flex-column min-vh-100">
+    {% include 'web/componentes/navbar.html' %}
+    
+    <main class="Flex-grow-1">
+        <h1>Flanes Disponibles</h1>
+        {% for flan in flanes %}
+        <img src="{{ flan.imagen.url }}" alt="" >
+        <li> {{ flan.nombre_producto }}</li>
+        <li> {{ flan.descripcion }}</li>
+        <li> {{ flan.precio }}</li>
+        <li> {{ flan.stock }}</li>
+        
+        {% endfor %}
+
+
+    </main>
+
+    
+
+
+    {% include "web/componentes/footer.html" %}
 </body>
 </html>
