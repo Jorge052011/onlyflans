@@ -11,18 +11,31 @@
       <div class="navbar-nav me-auto">
         <a class="nav-link" href="{% url 'home' %}">Flanes comunes</a>
         <a class="nav-link" href="{% url 'premium' %}">Flanes Premium</a>
+        {% if user.is_authenticated %}
+          <span class="nav-link text-danger disabled">Hola, {{ user.username }}</span>
+        {% endif %}
+
+        
       </div>
 
-      <div class="navbar-nav">
+      <div class="navbar-nav d-flex align-items-center">
         {% if user.is_authenticated %}
-          <form method="post" action="{% url 'logout' %}" style="display: inline;">
-            {% csrf_token %}
-            <button class="nav-link btn btn-link" type="submit" style="padding: 0; margin: 0;">Salir de la cuenta de {{ user.username }}</button>
-            
-          </form>
-        {% else %}
-          <a class="nav-link" href="{% url 'login' %}">Iniciar sesión</a>
-          <a class="nav-link" href="{% url 'register' %}">Registrarse</a>
+        <a class="nav-link px-3" href="{% url 'cart_detail' %}">
+          Carrito <span class="badge bg-primary">{{ cart_count }}</span>
+        </a>
+
+        
+        <form method="post" action="{% url 'logout' %}" class="m-0 p-0 d-inline">
+          {% csrf_token %}
+          <button type="submit" class="btn btn-link nav-link px-3 m-0 text-decoration-none">
+            Salir de la cuenta de {{ user.username }}
+          </button>
+        </form>
+          {% else %}
+          <li class="nav-item"><a class="nav-link" href="{% url 'login' %}">Iniciar sesión</a></li>
+          <li class="nav-item"><a class="nav-link" href="{% url 'register' %}">Registrarse</a></li>
+        
+        
         {% endif %}
       </div>
     </div>
