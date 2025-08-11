@@ -28,7 +28,10 @@ DEBUG = True
 ALLOWED_HOSTS = ["localhost", "127.0.0.1", ".github.dev"]
 
 CSRF_TRUSTED_ORIGINS = [
-    "https://*.github.dev", "https://localhost:8000", "https://127.0.0.1:8000"
+    "https://*.app.github.dev",
+    "https://*.github.dev",
+    "https://localhost:8000",
+    "https://127.0.0.1:8000",
 ]
 
 
@@ -148,3 +151,9 @@ SESSION_COOKIE_SAMESITE = "Lax"
 
 # Si forzabas HTTPS a través de Django, mantenlo en False en dev (Codespaces ya es HTTPS por proxy)
 SECURE_SSL_REDIRECT = False
+
+# Cookies: fija el dominio *exacto* base de Codespaces
+CSRF_COOKIE_DOMAIN = ".app.github.dev"
+SESSION_COOKIE_DOMAIN = ".app.github.dev"
+
+CSRF_USE_SESSIONS = True                   # evita depender de la cookie CSRF
