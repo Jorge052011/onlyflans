@@ -25,10 +25,10 @@ SECRET_KEY = "django-insecure-t%==2g1+!q#lea2(a7+t520ct)t$!rmt_nme2!9c3vs7(3d5y)
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ["localhost", "127.0.0.1", ".github.dev"]
 
 CSRF_TRUSTED_ORIGINS = [
-    'https://localhost:8000',
+    "https://*.github.dev", "https://localhost:8000", "https://127.0.0.1:8000"
 ]
 
 
@@ -74,7 +74,7 @@ TEMPLATES = [
 
 WSGI_APPLICATION = "onlyflans.wsgi.application"
 
-LOGIN_URL = "login/"
+LOGIN_URL = "login"
 LOGIN_REDIRECT_URL = "home"
 LOGOUT_REDIRECT_URL = "home"
 
@@ -133,3 +133,18 @@ MEDIA_ROOT = BASE_DIR / "media"
 # https://docs.djangoproject.com/en/5.2/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
+
+### borrar de aquí hacia abajo si no funciona
+
+# --- Proxy HTTPS de Codespaces ---
+USE_X_FORWARDED_HOST = True
+SECURE_PROXY_SSL_HEADER = ("HTTP_X_FORWARDED_PROTO", "https")
+
+# --- Cookies seguras en HTTPS ---
+CSRF_COOKIE_SECURE = True
+SESSION_COOKIE_SECURE = True
+CSRF_COOKIE_SAMESITE = "Lax"
+SESSION_COOKIE_SAMESITE = "Lax"
+
+# Si forzabas HTTPS a través de Django, mantenlo en False en dev (Codespaces ya es HTTPS por proxy)
+SECURE_SSL_REDIRECT = False

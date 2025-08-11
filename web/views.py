@@ -10,6 +10,6 @@ def home(request):
 
 @login_required
 def home_premium(request):
-    productos = Producto.objects.all().filter(premium="True")
+    flanes = Producto.objects.all().filter(premium="True")
 
-    return render(request, "web/home_premium.html", {"flanes":productos})
+    return render(request, "web/home_premium.html", {"flanes":flanes})

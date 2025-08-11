@@ -19,5 +19,5 @@ class Login(LoginView):
 
 class Logout(LogoutView):
     next_page = reverse_lazy("home")
-###   http_method_names = ["get","post"] 
+    http_method_names = ["post"] 
 
