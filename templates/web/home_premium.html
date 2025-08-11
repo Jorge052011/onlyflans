@@ -1,4 +1,3 @@
-
 {% load static %}
 
 <!DOCTYPE html>
@@ -6,43 +5,61 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Catálogo de Flanes</title>
     {% include 'web/componentes/scripts.html' %}
+    <style>
+        /* Todas las imágenes con misma altura y proporción */
+        .card-img-top {
+            height: 250px;          /* altura fija */
+            width: 100%;            /* ocupa todo el ancho */
+            object-fit: cover;      /* recorta manteniendo proporción */
+            border-top-left-radius: 0.5rem;
+            border-top-right-radius: 0.5rem;
+        }
+
+        /* Igualar altura de las tarjetas */
+        .card {
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+        }
+
+        /* Asegura que el contenido crezca y el footer de la tarjeta quede abajo */
+        .card-body {
+            flex: 1 1 auto;
+        }
+    </style>
 </head>
 
-<body style="padding-bottom: 50px;">
+<body style="padding-bottom: 50px; background-color: #d4e6ab;">
     {% include "web/componentes/navbar.html" %}
-     <section class="py-5">
-            <div class="container px-4 px-lg-5 mt-5">
-                
-                <div class="row gx-4 gx-lg-5 row-cols-2 row-cols-md-3 row-cols-xl-4 justify-content-center">
-                    {% for flan in flanes %}
-                    <div class="col mb-5">
-                        <div class="card h-100">
-                            <!-- Product image-->
-                             <a href=""> <img class="card-img-top" src="{{flan.imagen.url}}" alt="..." />  </a>
-                            
-                            <!-- Product details-->
-                            <div class="card-body p-4">
-                                <div class="text-center">
-                                    <!-- Product name-->
-                                    
-                                    <!-- Product price-->
-                                     <h5 class="fw-bolder">Nombre del flan: {{ flan.nombre_producto }}</h5>
-                                     <h5 class="fw-bolder">Descripción: {{ flan.descripcion }}</h5>
-                                     <h5 class="fw-bolder">Precio del flan: {{ flan.precio }}</h5>
-                                     <h5 class="fw-bolder">Stock del flan: {{ flan.stock }}</h5>
-                                </div>
+
+    <section class="py-5">
+        <div class="container px-4 px-lg-5 mt-5">
+            <div class="row gx-4 gx-lg-5 row-cols-1 row-cols-md-3 row-cols-xl-4 justify-content-center">
+                {% for flan in flanes %}
+                <div class="col mb-5">
+                    <div class="card h-100 shadow-sm">
+                        <!-- Imagen -->
+                        <a href="{% url 'detalle' flan.pk %}">
+                            <img class="card-img-top" src="{{ flan.imagen.url }}" alt="{{ flan.nombre_producto }}">
+                        </a>
+                        <!-- Detalles -->
+                        <div class="card-body p-4">
+                            <div class="text-center">
+                                <h5 class="fw-bolder">{{ flan.nombre_producto }}</h5>
+                                <p class="text-muted small">{{ flan.descripcion }}</p>
+                                <h6 class="text-success">${{ flan.precio }}</h6>
+                                <p class="small">Stock: {{ flan.stock }}</p>
                             </div>
                         </div>
                     </div>
-                    {% endfor %}
                 </div>
+                {% endfor %}
             </div>
-        </section>
+        </div>
+    </section>
+
     {% include "web/componentes/footer.html" %}
 </body>
-
-
 </html>
-
