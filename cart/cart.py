@@ -2,7 +2,7 @@
 
 
 from decimal import Decimal
-from django.conf import settings
+
 
 CART_SESSION_ID = "cart"
 

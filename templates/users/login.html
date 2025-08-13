@@ -36,10 +36,10 @@
     <div class="row justify-content-center">
       <div class="col-12 col-sm-10 col-md-8 col-lg-5">
         <div class="card shadow-sm p-4 my-5">
-          <h1 class="h4 text-center mb-3">Ingresar</h1>
+          <h1 class="h2 text-center mb-3">Ingresar</h1>
 
           {% if form.non_field_errors %}
-            <div class="alert alert-danger py-2">{{ form.non_field_errors }}</div>
+            <div class="alert alert-danger py-2">{{ form.non_field_errors }}</div> <!--genera mensaje de error al escribir mal la contraseña-->
           {% endif %}
 
           <form method="post" action="{% url 'login' %}" class="text-start">
