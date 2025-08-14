@@ -11,11 +11,11 @@
 
     <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
       <div class="navbar-nav me-auto">
-        <a class="nav-link {% if request.resolver_match.url_name == 'home' %}active{% endif %}" href="{% url 'home' %}">Flanes comunes</a>
+        <a class="nav-link {% if request.resolver_match.url_name == 'home' %}active{% endif %}" href="{% url 'home' %}">Flanes </a>
         <a class="nav-link {% if request.resolver_match.url_name == 'premium' %}active{% endif %}" href="{% url 'premium' %}">Flanes Premium</a>
         <a class="nav-link {% if request.resolver_match.url_name == 'acerca' %}active{% endif %}" href="{% url 'acerca' %}">Acerca</a>
         <a class="nav-link {% if request.resolver_match.url_name == 'bienvenido_cliente' %}active{% endif %}" href="{% url 'bienvenido_cliente' %}">Bienvenido</a>
-
+        <a class="nav-link {% if request.resolver_match.url_name == 'contacto' %}active{% endif %}" href="{% url 'contacto' %}">Contacto</a>
         {% if user.is_authenticated %}
           <span class="nav-link text-danger disabled">Hola, {{ user.username }}</span>
         {% endif %}
