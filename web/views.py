@@ -20,3 +20,9 @@ class ProductoDetalle(DetailView):
     model = Producto
     template_name = 'web/detalle_producto.html'
     context_object_name = 'flan'
+
+def acerca(request):
+    return render(request, "web/acerca.html")
+
+def bienvenido_cliente(request):
+    return render(request, "web/bienvenido.html")

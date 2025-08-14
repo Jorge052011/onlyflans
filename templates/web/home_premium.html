@@ -1,65 +1,60 @@
-{% load static %}
+{% extends "web/base.html" %}
+{% block title %}Catálogo Premium{% endblock %}
 
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Catálogo de Flanes</title>
-    {% include 'web/componentes/scripts.html' %}
-    <style>
-        /* Todas las imágenes con misma altura y proporción */
-        .card-img-top {
-            height: 250px;          /* altura fija */
-            width: 100%;            /* ocupa todo el ancho */
-            object-fit: cover;      /* recorta manteniendo proporción */
-            border-top-left-radius: 0.5rem;
-            border-top-right-radius: 0.5rem;
-        }
+{% block extra_head %}
+<style>
+  .card-img-top {
+    height: 250px; width: 100%; object-fit: cover;
+    border-top-left-radius: 0.5rem; border-top-right-radius: 0.5rem;
+  }
+  .card { height: 100%; display: flex; flex-direction: column; }
+  .card-body { flex: 1 1 auto; }
+</style>
+{% endblock %}
 
-        /* Igualar altura de las tarjetas */
-        .card {
-            height: 100%;
-            display: flex;
-            flex-direction: column;
-        }
+{% block content %}
 
-        /* Asegura que el contenido crezca y el footer de la tarjeta quede abajo */
-        .card-body {
-            flex: 1 1 auto;
-        }
-    </style>
-</head>
+<section class="py-5 ">
+  <div class="container">
+    <!-- Título -->
+    <div class="text-center mb-5">
+      <h1 class="fw-bold text-warning">Catálogo Premium</h1>
+      <p class="lead text-muted">Descubre nuestros flanes exclusivos, preparados con ingredientes de la más alta calidad.</p>
+    </div>
 
-<body style="padding-bottom: 50px; background-color: #d4e6ab;">
-    {% include "web/componentes/navbar.html" %}
-
-    <section class="py-5">
-        <div class="container px-4 px-lg-5 mt-5">
-            <div class="row gx-4 gx-lg-5 row-cols-1 row-cols-md-3 row-cols-xl-4 justify-content-center">
-                {% for flan in flanes %}
-                <div class="col mb-5">
-                    <div class="card h-100 shadow-sm">
-                        <!-- Imagen -->
-                        <a href="{% url 'detalle' flan.pk %}">
-                            <img class="card-img-top" src="{{ flan.imagen.url }}" alt="{{ flan.nombre_producto }}">
-                        </a>
-                        <!-- Detalles -->
-                        <div class="card-body p-4">
-                            <div class="text-center">
-                                <h5 class="fw-bolder">{{ flan.nombre_producto }}</h5>
-                                <p class="text-muted small">{{ flan.descripcion }}</p>
-                                <h6 class="text-success">${{ flan.precio }}</h6>
-                                <p class="small">Stock: {{ flan.stock }}</p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                {% endfor %}
-            </div>
+    <!-- Grid de productos -->
+    <div class="row g-4">
+      {% for flan in flanes %}
+      <div class="col-sm-6 col-md-4 col-lg-3">
+        <div class="card h-100 shadow-sm border-0">
+          <a href="{% url 'detalle' flan.pk %}">
+            <img src="{{ flan.imagen.url }}" class="card-img-top rounded-top" alt="{{ flan.nombre_producto }}">
+          </a>
+          <div class="card-body text-center">
+            <h5 class="fw-bold text-dark">{{ flan.nombre_producto }}</h5>
+            <p class="text-muted small mb-2">{{ flan.descripcion|truncatewords:10 }}</p>
+            <h6 class="text-success mb-3">${{ flan.precio }}</h6>
+            <a href="{% url 'detalle' flan.pk %}" class="btn btn-outline-primary btn-sm">
+              Ver más
+            </a>
+          </div>
         </div>
-    </section>
+      </div>
+      {% empty %}
+      <div class="col-12 text-center">
+        <p class="text-muted">No hay productos premium disponibles en este momento.</p>
+      </div>
+      {% endfor %}
+    </div>
 
-    {% include "web/componentes/footer.html" %}
-</body>
-</html>
+    <!-- Mensaje final -->
+    <div class="text-center mt-5">
+      <blockquote class="blockquote">
+        <p class="fst-italic mb-1">“La exclusividad no se compra, se vive.”</p>
+        <footer class="blockquote-footer">Equipo <cite>OnlyFlans</cite></footer>
+      </blockquote>
+    </div>
+  </div>
+</section>
+
+{% endblock %}
